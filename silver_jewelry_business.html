@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silver & Co — Fine Silver Jewelry</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F8F7F5;--white:#FFFFFF;--surface:#F2F0EC;
+  --silver:#A8A9AD;--silver-light:#D4D5D8;--silver-dark:#6B6C70;
+  --silver-shine:#E8E9EB;--text:#1A1A1A;--muted:#6B6B6B;
+  --border:#E0DDD8;--accent:#8C8D91;
+  --gold:#B8975A;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(248,247,245,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 3rem}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:500;letter-spacing:0.15em;color:var(--text)}
+.nav-brand span{color:var(--silver-dark)}
+.nav-links{display:flex;gap:2.5rem}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--text)}
+.nav-ebay{background:var(--text);color:var(--white);padding:0.5rem 1.25rem;border-radius:4px;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:all 0.2s}
+.nav-ebay:hover{background:var(--silver-dark);transform:translateY(-1px)}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:68px 0 0;overflow:hidden}
+.hero-left{padding:5rem 3rem 5rem 5rem}
+.hero-eyebrow{font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--silver-dark);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem}
+.hero-eyebrow::before{content:'';width:40px;height:1px;background:var(--silver)}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5vw,5.5rem);font-weight:300;line-height:1.05;letter-spacing:-0.01em;margin-bottom:1.5rem}
+.hero h1 em{font-style:italic;color:var(--silver-dark)}
+.hero-desc{font-size:0.95rem;color:var(--muted);max-width:400px;line-height:1.8;margin-bottom:2.5rem}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
+.btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.8rem 1.75rem;font-family:'Inter',sans-serif;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;transition:all 0.25s;border-radius:3px}
+.btn-dark{background:var(--text);color:var(--white)}
+.btn-dark:hover{background:var(--silver-dark);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--text)}
+.btn-outline:hover{background:var(--text);color:var(--white);transform:translateY(-2px)}
+.hero-stats{display:flex;gap:2.5rem;padding-top:2rem;border-top:1px solid var(--border)}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--text)}
+.stat-label{font-size:0.7rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.1rem}
+
+/* HERO RIGHT - Visual */
+.hero-right{height:100vh;background:linear-gradient(135deg,#E8E9EB 0%,#D4D5D8 40%,#C0C1C5 100%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hero-ring{position:relative;width:320px;height:320px}
+.ring-outer{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(255,255,255,0.6);animation:slowSpin 20s linear infinite}
+.ring-middle{position:absolute;inset:30px;border-radius:50%;border:1px solid rgba(255,255,255,0.4);animation:slowSpin 15s linear infinite reverse}
+.ring-inner{position:absolute;inset:80px;border-radius:50%;background:radial-gradient(circle,#F2F0EC,#E0DDD8);box-shadow:inset 0 4px 20px rgba(0,0,0,0.1),0 8px 40px rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center}
+.ring-text{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;color:var(--silver-dark);letter-spacing:0.2em;text-align:center;line-height:1.4}
+.floating-gem{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.9),rgba(200,201,205,0.6));box-shadow:0 4px 15px rgba(0,0,0,0.1)}
+.gem1{width:20px;height:20px;top:15%;left:20%;animation:floatGem 6s ease-in-out infinite}
+.gem2{width:12px;height:12px;top:30%;right:15%;animation:floatGem 8s ease-in-out infinite 2s}
+.gem3{width:16px;height:16px;bottom:20%;left:15%;animation:floatGem 7s ease-in-out infinite 1s}
+.gem4{width:8px;height:8px;bottom:30%;right:20%;animation:floatGem 5s ease-in-out infinite 3s}
+@keyframes floatGem{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+@keyframes slowSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.hero-label{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver-dark)}
+
+/* MARQUEE */
+.marquee{background:var(--text);padding:0.9rem 0;overflow:hidden}
+.marquee-track{display:flex;gap:3rem;animation:marquee 18s linear infinite;white-space:nowrap}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.marquee-item{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver-light);display:flex;align-items:center;gap:1rem}
+.marquee-item::after{content:'✦';color:var(--silver)}
+
+/* ABOUT */
+.about{padding:7rem 5rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;max-width:1200px;margin:0 auto}
+.about-eyebrow{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver-dark);margin-bottom:1rem}
+.about h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3.5rem);font-weight:300;line-height:1.2;margin-bottom:1.5rem}
+.about p{font-size:0.9rem;color:var(--muted);line-height:1.9;margin-bottom:1rem}
+.about-visual{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.about-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.5rem;text-align:center;transition:all 0.25s}
+.about-card:hover{border-color:var(--silver);transform:translateY(-3px)}
+.about-card-icon{font-size:1.75rem;margin-bottom:0.75rem}
+.about-card h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;margin-bottom:0.3rem}
+.about-card p{font-size:0.75rem;color:var(--muted);line-height:1.5}
+
+/* SERVICES */
+.services{background:var(--text);padding:7rem 3rem;color:var(--white)}
+.services-inner{max-width:1200px;margin:0 auto}
+.services-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4rem;flex-wrap:wrap;gap:2rem}
+.services-eyebrow{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver);margin-bottom:0.75rem}
+.services h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3.5rem);font-weight:300;color:var(--white);line-height:1.2}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:rgba(255,255,255,0.1)}
+.service-item{background:var(--text);padding:2.5rem 2rem;transition:background 0.25s;border:1px solid transparent}
+.service-item:hover{background:#1E1E1E;border-color:rgba(168,169,173,0.3)}
+.service-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:rgba(168,169,173,0.2);line-height:1;margin-bottom:1rem}
+.service-icon{font-size:1.5rem;margin-bottom:1rem}
+.service-item h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--white);margin-bottom:0.75rem}
+.service-item p{font-size:0.8rem;color:rgba(255,255,255,0.5);line-height:1.8}
+.service-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1rem}
+.s-tag{font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--silver);border:1px solid rgba(168,169,173,0.3);padding:0.2rem 0.6rem;border-radius:2px}
+
+/* COLLECTION */
+.collection{padding:7rem 3rem;max-width:1200px;margin:0 auto}
+.collection-top{text-align:center;margin-bottom:4rem}
+.collection-eyebrow{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver-dark);margin-bottom:0.75rem}
+.collection h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3.5rem);font-weight:300;margin-bottom:1rem}
+.collection p{font-size:0.9rem;color:var(--muted);max-width:450px;margin:0 auto}
+.collection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
+.product-card{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:all 0.3s;cursor:pointer}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.08)}
+.product-img{height:200px;display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative;overflow:hidden}
+.product-img-ring{background:linear-gradient(135deg,#E8E9EB,#D0D1D5)}
+.product-img-necklace{background:linear-gradient(135deg,#DFE0E3,#C8C9CD)}
+.product-img-bracelet{background:linear-gradient(135deg,#E5E6E8,#D8D9DC)}
+.product-img-earring{background:linear-gradient(135deg,#EAEBED,#D4D5D8)}
+.product-shine{position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);transition:left 0.5s}
+.product-card:hover .product-shine{left:150%}
+.product-body{padding:1.25rem}
+.product-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;margin-bottom:0.25rem}
+.product-desc{font-size:0.78rem;color:var(--muted);margin-bottom:0.75rem}
+.product-footer{display:flex;justify-content:space-between;align-items:center}
+.product-material{font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--silver-dark);background:var(--surface);padding:0.2rem 0.6rem;border-radius:2px}
+.product-ebay{font-size:0.7rem;color:var(--silver-dark);text-decoration:none;letter-spacing:0.05em;display:flex;align-items:center;gap:0.3rem;transition:color 0.2s}
+.product-ebay:hover{color:var(--text)}
+
+/* TESTIMONIALS */
+.testimonials{background:var(--surface);padding:7rem 3rem}
+.testimonials-inner{max-width:1200px;margin:0 auto}
+.test-top{text-align:center;margin-bottom:4rem}
+.test-top .eyebrow{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver-dark);margin-bottom:0.75rem}
+.test-top h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3vw,3rem);font-weight:300}
+.test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.test-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:2rem;transition:all 0.25s}
+.test-card:hover{border-color:var(--silver);transform:translateY(-3px)}
+.test-stars{color:var(--gold);font-size:0.8rem;margin-bottom:1rem;letter-spacing:0.2em}
+.test-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;font-weight:300;color:var(--text);line-height:1.7;margin-bottom:1.25rem}
+.test-author{display:flex;align-items:center;gap:0.75rem}
+.test-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--silver-light),var(--silver));display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:500;color:var(--white)}
+.test-name{font-size:0.8rem;font-weight:500}
+.test-loc{font-size:0.7rem;color:var(--muted)}
+
+/* EBAY SECTION */
+.ebay-section{padding:7rem 3rem;max-width:1200px;margin:0 auto;text-align:center}
+.ebay-badge{display:inline-flex;align-items:center;gap:0.5rem;background:var(--surface);border:1px solid var(--border);padding:0.4rem 1rem;border-radius:20px;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--silver-dark);margin-bottom:1.5rem}
+.ebay-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,4rem);font-weight:300;line-height:1.15;margin-bottom:1.25rem}
+.ebay-section p{font-size:0.95rem;color:var(--muted);max-width:480px;margin:0 auto 2.5rem}
+.ebay-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;margin:3rem 0;text-align:left}
+.ebay-feat{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.5rem}
+.ebay-feat-icon{font-size:1.5rem;margin-bottom:0.75rem}
+.ebay-feat h4{font-size:0.875rem;font-weight:500;margin-bottom:0.35rem}
+.ebay-feat p{font-size:0.775rem;color:var(--muted);line-height:1.6}
+
+/* CONTACT */
+.contact{background:var(--text);padding:7rem 3rem;color:var(--white)}
+.contact-inner{max-width:700px;margin:0 auto;text-align:center}
+.contact-eyebrow{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver);margin-bottom:1rem}
+.contact h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3.5rem);font-weight:300;margin-bottom:1rem}
+.contact p{font-size:0.9rem;color:rgba(255,255,255,0.55);margin-bottom:3rem}
+.contact-pills{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.contact-pill{display:flex;align-items:center;gap:0.6rem;border:1px solid rgba(255,255,255,0.15);padding:0.8rem 1.5rem;border-radius:4px;color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.8rem;letter-spacing:0.05em;transition:all 0.2s}
+.contact-pill:hover{border-color:var(--silver-light);color:var(--white);transform:translateY(-2px)}
+
+/* FOOTER */
+footer{background:var(--text);border-top:1px solid rgba(255,255,255,0.08);padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--white);letter-spacing:0.1em}
+.footer-copy{font-size:0.72rem;color:rgba(255,255,255,0.35);letter-spacing:0.05em}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left{padding:3rem 1.5rem}
+  .about{grid-template-columns:1fr;padding:4rem 1.5rem;gap:3rem}
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  .services,.collection,.testimonials,.ebay-section,.contact{padding:4rem 1.5rem}
+  footer{padding:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Silver <span>&</span> Co</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#collection">Collection</a>
+    <a href="#services">Services</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="https://ebay.com" target="_blank" class="nav-ebay">Shop on eBay</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Fine Silver Jewelry · eBay Store</div>
+    <h1>Crafted in<br><em>Pure Silver,</em><br>Made to Last</h1>
+    <p class="hero-desc">Handcrafted fine silver jewelry for every occasion. Rings, necklaces, bracelets and earrings — all available on our eBay store with worldwide shipping.</p>
+    <div class="hero-ctas">
+      <a href="https://ebay.com" target="_blank" class="btn btn-dark">🛍️ Shop on eBay</a>
+      <a href="#collection" class="btn btn-outline">View Collection</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">500+</div><div class="stat-label">Items Sold</div></div>
+      <div><div class="stat-num">100%</div><div class="stat-label">Pure Silver</div></div>
+      <div><div class="stat-num">★ 4.9</div><div class="stat-label">eBay Rating</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-ring">
+      <div class="ring-outer"></div>
+      <div class="ring-middle"></div>
+      <div class="ring-inner">
+        <div class="ring-text">Fine<br>Silver</div>
+      </div>
+    </div>
+    <div class="floating-gem gem1"></div>
+    <div class="floating-gem gem2"></div>
+    <div class="floating-gem gem3"></div>
+    <div class="floating-gem gem4"></div>
+    <div class="hero-label">Sterling 925 · Fine Silver</div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <div class="marquee-item">Sterling Silver 925</div>
+    <div class="marquee-item">Handcrafted</div>
+    <div class="marquee-item">Fine Jewelry</div>
+    <div class="marquee-item">Free Shipping</div>
+    <div class="marquee-item">eBay Top Seller</div>
+    <div class="marquee-item">Rings & Necklaces</div>
+    <div class="marquee-item">Bracelets & Earrings</div>
+    <div class="marquee-item">Worldwide Delivery</div>
+    <div class="marquee-item">Sterling Silver 925</div>
+    <div class="marquee-item">Handcrafted</div>
+    <div class="marquee-item">Fine Jewelry</div>
+    <div class="marquee-item">Free Shipping</div>
+    <div class="marquee-item">eBay Top Seller</div>
+    <div class="marquee-item">Rings & Necklaces</div>
+    <div class="marquee-item">Bracelets & Earrings</div>
+    <div class="marquee-item">Worldwide Delivery</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about">
+    <div class="reveal">
+      <div class="about-eyebrow">About Us</div>
+      <h2>Passion for Fine Silver Craftsmanship</h2>
+      <p>We are a Mumbai-based fine silver jewelry business, dedicated to creating beautiful, high-quality pieces that stand the test of time. Every piece is crafted with care using authentic 925 Sterling Silver.</p>
+      <p>From elegant rings to delicate necklaces, our collection is designed for modern women who appreciate timeless beauty. Shop our full range on eBay with fast, secure worldwide shipping.</p>
+      <a href="https://ebay.com" target="_blank" class="btn btn-dark" style="margin-top:1.5rem">Browse Our eBay Store →</a>
+    </div>
+    <div class="about-visual reveal">
+      <div class="about-card">
+        <div class="about-card-icon">💎</div>
+        <h4>925 Sterling Silver</h4>
+        <p>Every piece is made from certified 925 Sterling Silver — the finest quality</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🤝</div>
+        <h4>Handcrafted</h4>
+        <p>Each item is handcrafted with attention to detail and precision</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🚚</div>
+        <h4>Fast Shipping</h4>
+        <p>Worldwide shipping with tracking. Safe and secure packaging always</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">⭐</div>
+        <h4>Top Rated</h4>
+        <p>4.9 star rating on eBay with hundreds of happy customers globally</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <div class="services-top reveal">
+      <div>
+        <div class="services-eyebrow">What We Offer</div>
+        <h2>Our Jewelry<br>Categories</h2>
+      </div>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-item">
+        <div class="service-num">01</div>
+        <div class="service-icon">💍</div>
+        <h3>Silver Rings</h3>
+        <p>Elegant rings in various designs — from minimalist bands to intricate statement pieces. Custom sizes available.</p>
+        <div class="service-tags"><span class="s-tag">Solitaire</span><span class="s-tag">Band</span><span class="s-tag">Statement</span></div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">02</div>
+        <div class="service-icon">📿</div>
+        <h3>Necklaces</h3>
+        <p>Delicate chains and pendants crafted for everyday wear or special occasions. Beautifully packaged for gifting.</p>
+        <div class="service-tags"><span class="s-tag">Chains</span><span class="s-tag">Pendants</span><span class="s-tag">Chokers</span></div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">03</div>
+        <div class="service-icon">✨</div>
+        <h3>Bracelets</h3>
+        <p>Timeless bracelets from sleek bangles to charm bracelets — perfect for layering or wearing alone.</p>
+        <div class="service-tags"><span class="s-tag">Bangles</span><span class="s-tag">Charm</span><span class="s-tag">Cuff</span></div>
+      </div>
+      <div class="service-item">
+        <div class="service-num">04</div>
+        <div class="service-icon">🌟</div>
+        <h3>Earrings</h3>
+        <p>From subtle studs to elegant drop earrings — each pair crafted to add a touch of shine to your look.</p>
+        <div class="service-tags"><span class="s-tag">Studs</span><span class="s-tag">Drops</span><span class="s-tag">Hoops</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION -->
+<section class="collection" id="collection">
+  <div class="collection-top reveal">
+    <div class="collection-eyebrow">Featured Collection</div>
+    <h2>Bestselling Pieces</h2>
+    <p>Our most loved silver jewelry pieces — all available on our eBay store with fast worldwide shipping.</p>
+  </div>
+  <div class="collection-grid">
+    <div class="product-card reveal">
+      <div class="product-img product-img-ring">
+        <div class="product-shine"></div>
+        💍
+      </div>
+      <div class="product-body">
+        <div class="product-name">Minimalist Silver Band</div>
+        <div class="product-desc">Classic 925 sterling silver band ring — perfect for everyday wear</div>
+        <div class="product-footer">
+          <span class="product-material">925 Sterling</span>
+          <a href="https://ebay.com" target="_blank" class="product-ebay">View on eBay →</a>
+        </div>
+      </div>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-img product-img-necklace">
+        <div class="product-shine"></div>
+        📿
+      </div>
+      <div class="product-body">
+        <div class="product-name">Delicate Chain Necklace</div>
+        <div class="product-desc">Fine silver chain necklace with a subtle pendant — elegant and timeless</div>
+        <div class="product-footer">
+          <span class="product-material">925 Sterling</span>
+          <a href="https://ebay.com" target="_blank" class="product-ebay">View on eBay →</a>
+        </div>
+      </div>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-img product-img-bracelet">
+        <div class="product-shine"></div>
+        ✨
+      </div>
+      <div class="product-body">
+        <div class="product-name">Charm Bracelet</div>
+        <div class="product-desc">Handcrafted silver charm bracelet — a beautiful gift for any occasion</div>
+        <div class="product-footer">
+          <span class="product-material">925 Sterling</span>
+          <a href="https://ebay.com" target="_blank" class="product-ebay">View on eBay →</a>
+        </div>
+      </div>
+    </div>
+    <div class="product-card reveal">
+      <div class="product-img product-img-earring">
+        <div class="product-shine"></div>
+        🌟
+      </div>
+      <div class="product-body">
+        <div class="product-name">Silver Stud Earrings</div>
+        <div class="product-desc">Classic silver stud earrings with a brilliant finish — timeless elegance</div>
+        <div class="product-footer">
+          <span class="product-material">925 Sterling</span>
+          <a href="https://ebay.com" target="_blank" class="product-ebay">View on eBay →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-inner">
+    <div class="test-top reveal">
+      <div class="eyebrow">Customer Reviews</div>
+      <h2>What Our Customers Say</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <div class="test-stars">★★★★★</div>
+        <div class="test-text">"Absolutely beautiful ring! The quality is outstanding and it arrived so fast. Will definitely be ordering again from this seller."</div>
+        <div class="test-author">
+          <div class="test-avatar">SM</div>
+          <div><div class="test-name">Sarah M.</div><div class="test-loc">United Kingdom · eBay Verified</div></div>
+        </div>
+      </div>
+      <div class="test-card reveal">
+        <div class="test-stars">★★★★★</div>
+        <div class="test-text">"The necklace is even more beautiful in person. Excellent craftsmanship and packaging. Bought as a gift and she loved it!"</div>
+        <div class="test-author">
+          <div class="test-avatar">RK</div>
+          <div><div class="test-name">Priya K.</div><div class="test-loc">India · eBay Verified</div></div>
+        </div>
+      </div>
+      <div class="test-card reveal">
+        <div class="test-stars">★★★★★</div>
+        <div class="test-text">"Third purchase from this store and every time the quality is perfect. Fast shipping, beautiful jewelry. Highly recommend!"</div>
+        <div class="test-author">
+          <div class="test-avatar">JL</div>
+          <div><div class="test-name">Jessica L.</div><div class="test-loc">United States · eBay Verified</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EBAY SECTION -->
+<section class="ebay-section" id="ebay">
+  <div class="reveal">
+    <div class="ebay-badge">✦ Available on eBay</div>
+    <h2>Shop Our Full Collection<br>on eBay</h2>
+    <p>Browse all our fine silver jewelry pieces with secure payments, buyer protection and fast worldwide shipping.</p>
+    <a href="https://ebay.com" target="_blank" class="btn btn-dark" style="font-size:0.875rem;padding:1rem 2.5rem">🛍️ Visit Our eBay Store</a>
+  </div>
+  <div class="ebay-features reveal">
+    <div class="ebay-feat">
+      <div class="ebay-feat-icon">🔒</div>
+      <h4>Buyer Protection</h4>
+      <p>Every purchase is covered by eBay's Money Back Guarantee</p>
+    </div>
+    <div class="ebay-feat">
+      <div class="ebay-feat-icon">🚚</div>
+      <h4>Fast Shipping</h4>
+      <p>Worldwide shipping with tracking on every order</p>
+    </div>
+    <div class="ebay-feat">
+      <div class="ebay-feat-icon">💳</div>
+      <h4>Secure Payment</h4>
+      <p>Pay safely via PayPal, credit card and more on eBay</p>
+    </div>
+    <div class="ebay-feat">
+      <div class="ebay-feat-icon">↩️</div>
+      <h4>Easy Returns</h4>
+      <p>Hassle-free return policy for your peace of mind</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner reveal">
+    <div class="contact-eyebrow">Get In Touch</div>
+    <h2>We'd Love to Hear From You</h2>
+    <p>Have a question about our jewelry? Looking for a custom piece? Get in touch and we'll get back to you quickly.</p>
+    <div class="contact-pills">
+      <a href="mailto:anujdubey4321@gmail.com" class="contact-pill">📧 Email Us</a>
+      <a href="tel:+917756986742" class="contact-pill">📞 +91 7756986742</a>
+      <a href="https://ebay.com" target="_blank" class="contact-pill">🛍️ eBay Messages</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Silver & Co</div>
+  <div class="footer-copy">© 2026 Silver & Co · Fine Silver Jewelry · Mumbai, India · Selling on eBay</div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) e.target.classList.add('visible');
+  });
+}, {threshold: 0.1});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
